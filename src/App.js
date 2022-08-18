@@ -53,25 +53,19 @@ function App() {
   useEffect(() => {
     if(botTurn){
       setTimeout(() => {
-        // Wszystkie dostepne ruchy 
         const possibleMoves = movesLeft;
         if(possibleMoves.length !== 0){
       
-          // Ruchy gracza
           const playerMoves = player1Moves;
 
-          // Ostatni ruch gracza wraz z jego indexem.
           const latestPlayerMoveIndex = playerMoves.length - 1;
           const latestPlayerMove = playerMoves[latestPlayerMoveIndex];
 
-          // Sugerowane kombinacje na podstawie ostatniego ruchu gracza.
           const bestMoves = winning.filter((comb) => {
             if(comb[playerMoves.length - 1] === latestPlayerMove){
               return comb[playerMoves.length];
             }
           })
-
-          console.log(bestMoves);
 
           let calcMove;
 
@@ -83,33 +77,9 @@ function App() {
             calcMove = randomComb[latestPlayerMoveIndex + 1];
           }
 
-          console.log("%c Best move: " + calcMove, "color: green");
-
           document.getElementById(calcMove).click();
 
           setBotTurn(false);
-
-          //Co potrafi:
-          // - przewiduje pierwszy ruch i wybiera losowa kombinacje
-
-          //Co musi umiec:
-          // - gdy gracz jest blisko wygranej musi mu przerwac kombinacje.
-
-
-
-
-          //const field = Math.floor(Math.random() * possibleMoves.length);
-
-          // console.log(possibleMoves[field]);
-          // if(possibleMoves[field] !== undefined){
-          //   document.getElementById(possibleMoves[field]).click();
-          //   setBotTurn(false);
-          // }else{
-          //   setTimeout(() => {
-          //     restartGame();
-          //   },2000)
-          // }
-
           }
       },100);
     }
